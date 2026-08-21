@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Markdown editor and preview with Mermaid support, A4 / phone export. Markdown 编辑器与预览，支持 Mermaid 与 A4 / 手机长图导出。">
+  <title>MD·PRESS — Markdown Editor</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23d52b1e'/%3E%3Ctext x='16' y='22' font-family='Helvetica, Arial, sans-serif' font-size='13' font-weight='700' fill='%23fff' text-anchor='middle'%3EMD%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="vendor/codemirror.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/editor.css">
+  <link rel="stylesheet" href="css/preview.css">
+  <link rel="stylesheet" href="css/print.css">
+</head>
+<body data-mode="split">
+
+  <div class="app">
+
+    <header class="masthead">
+      <div class="masthead-row">
+        <span class="brand" data-i18n="brand">MD·PRESS</span>
+        <div class="lang-switch" role="group" data-i18n-aria-label="langAria" aria-label="Language">
+          <button type="button" id="lang-en" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" id="lang-zh" data-lang="zh" aria-pressed="false">中文</button>
+        </div>
+      </div>
+
+      <div class="masthead-row masthead-tools">
+        <div class="view-switch" role="group" data-i18n-aria-label="modeAria" aria-label="View mode">
+          <button type="button" id="mode-edit" data-mode="edit" data-i18n="modeEdit">Edit</button>
+          <button type="button" id="mode-split" data-mode="split" aria-pressed="true" data-i18n="modeSplit">Split</button>
+          <button type="button" id="mode-preview" data-mode="preview" data-i18n="modePreview">Preview</button>
+        </div>
+
+        <div class="actions">
+          <button type="button" id="btn-new" class="btn" data-i18n="btnNew">New</button>
+          <button type="button" id="btn-open" class="btn" data-i18n="btnOpen">Open .md</button>
+          <button type="button" id="btn-save-md" class="btn" data-i18n="btnSaveMd">Download .md</button>
+          <div class="export-menu" id="export-menu">
+            <button type="button" id="btn-export" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+              <span data-i18n="btnExport">Export</span><span class="caret" aria-hidden="true">▾</span>
+            </button>
+            <div class="menu" role="menu" hidden>
+              <button type="button" class="menu-item" role="menuitem" id="exp-pdf" data-i18n="expPdf">A4 · PDF (print)</button>
+              <button type="button" class="menu-item" role="menuitem" id="exp-phone" data-i18n="expPhone">Phone image · PNG</button>
+              <button type="button" class="menu-item" role="menuitem" id="exp-a4" data-i18n="expA4">A4 image · PNG</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace" id="workspace">
+
+      <section class="pane pane-editor" id="pane-editor" data-i18n-aria-label="paneEditorAria" aria-label="Editor">
+        <div class="pane-head">
+          <h2 class="label" data-i18n="paneEditor">01 — Editor</h2>
+          <div class="fmt-toolbar" role="toolbar" data-i18n-aria-label="fmtAria" aria-label="Formatting">
+            <button type="button" class="fmt" id="fmt-bold" data-i18n="fmtBold">Bold</button>
+            <button type="button" class="fmt fmt-i" id="fmt-italic" data-i18n="fmtItalic">Italic</button>
+            <button type="button" class="fmt fmt-mono" id="fmt-code" data-i18n="fmtCode">Code</button>
+            <button type="button" class="fmt" id="fmt-link" data-i18n="fmtLink">Link</button>
+            <button type="button" class="fmt" id="fmt-list" data-i18n="fmtList">List</button>
+            <button type="button" class="fmt" id="fmt-mermaid" data-i18n="fmtDiagram">Diagram</button>
+          </div>
+        </div>
+        <div class="editor-body">
+          <textarea id="editor-source" data-i18n-aria-label="srcAria" aria-label="Markdown source" spellcheck="false"></textarea>
+        </div>
+      </section>
+
+      <div class="divider" id="divider" data-i18n-aria-label="dividerAria" aria-label="Resize panes" role="separator" aria-orientation="vertical" tabindex="0" title="⇔"></div>
+
+      <section class="pane pane-preview" id="pane-preview" data-i18n-aria-label="panePreviewAria" aria-label="Preview">
+        <div class="pane-head">
+          <h2 class="label" data-i18n="panePreview">02 — Preview</h2>
+          <button type="button" id="btn-sync" class="mini-toggle" aria-pressed="true" data-i18n="syncScroll">Sync scroll</button>
+        </div>
+        <div class="preview-scroll" id="preview-scroll">
+          <article class="md-doc" id="preview" data-i18n-aria-label="prevAria" aria-label="Rendered document"></article>
+        </div>
+      </section>
+
+    </div>
+
+    <footer class="statusbar">
+      <span class="st-name" id="st-name">document.md</span>
+      <span class="st-stats">
+        <span id="st-pos">—</span><span class="sep">·</span>
+        <span id="st-words">—</span><span class="sep">·</span>
+        <span id="st-chars">—</span><span class="sep">·</span>
+        <span id="st-lines">—</span>
+      </span>
+      <span class="st-save" id="st-save" aria-live="polite">—</span>
+    </footer>
+
+  </div>
+
+  <div id="print-root" aria-hidden="true"></div>
+  <div id="png-root" aria-hidden="true"></div>
+  <input type="file" id="file-open" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
+
+  <script src="vendor/codemirror.js"></script>
+  <script src="vendor/mode-xml.js"></script>
+  <script src="vendor/mode-markdown.js"></script>
+  <script src="vendor/addon-continuelist.js"></script>
+  <script src="vendor/addon-active-line.js"></script>
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/highlight.min.js"></script>
+  <script src="vendor/mermaid.min.js"></script>
+  <script src="vendor/html-to-image.min.js"></script>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/markdown.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

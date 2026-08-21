@@ -1,0 +1,385 @@
+/* =====================================================================
+   MD·PRESS — application shell
+   Swiss / German school: white paper, near-black ink, hairline rules,
+   Helvetica system stack, one red accent, no gradients or shadows.
+   ===================================================================== */
+
+:root {
+  --ink: #111111;
+  --paper: #ffffff;
+  --hairline: #e4e4e4;
+  --gray: #666666;
+  --red: #d52b1e;
+  --sans: "Helvetica Neue", Helvetica, "Segoe UI", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  border-top: 3px solid var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+::selection { background: var(--ink); color: var(--paper); }
+
+.vh {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- app frame ------------------------------------------------------- */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ---- masthead ---------------------------------------------------------- */
+
+.masthead {
+  border-bottom: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.masthead-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.9rem;
+  padding: 0.55rem 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  margin-right: auto;
+}
+
+.brand::before {
+  content: "";
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--red);
+  flex: none;
+}
+
+/* segmented controls (view switch + language switch) */
+.view-switch, .lang-switch {
+  display: flex;
+  border: 1px solid var(--ink);
+}
+
+.view-switch button, .lang-switch button {
+  appearance: none;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  min-height: 40px;
+  padding: 0 0.85rem;
+  cursor: pointer;
+}
+
+.view-switch button + button, .lang-switch button + button {
+  border-left: 1px solid var(--ink);
+}
+
+.view-switch button[aria-pressed="true"],
+.lang-switch button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* buttons */
+.btn {
+  appearance: none;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  min-height: 40px;
+  padding: 0 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn:hover { background: var(--ink); color: var(--paper); }
+
+.btn-primary { background: var(--ink); color: var(--paper); }
+.btn-primary:hover { background: var(--red); border-color: var(--red); }
+
+.actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+
+/* export dropdown */
+.export-menu { position: relative; }
+
+.caret { margin-left: 0.4rem; font-size: 0.65em; }
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 5px);
+  min-width: 15rem;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  z-index: 60;
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  padding: 0.65rem 0.95rem;
+  cursor: pointer;
+}
+
+.menu-item:last-child { border-bottom: 0; }
+.menu-item:hover { background: var(--ink); color: var(--paper); }
+
+/* ---- workspace ----------------------------------------------------------- */
+
+.workspace {
+  --split: 50%;
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 46px;
+  padding: 0.3rem 0.9rem;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--paper);
+}
+
+.label {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.fmt-toolbar {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fmt-toolbar::-webkit-scrollbar { display: none; }
+
+.fmt {
+  appearance: none;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.6rem;
+  min-height: 36px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.fmt:hover { border-color: var(--ink); }
+.fmt-i { font-style: italic; }
+.fmt-mono { font-family: var(--mono); font-weight: 500; }
+
+.mini-toggle {
+  appearance: none;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  color: var(--gray);
+  font: inherit;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  min-height: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.mini-toggle[aria-pressed="true"] {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.mini-toggle[aria-pressed="true"]::before {
+  content: "● ";
+  color: var(--red);
+  font-size: 0.7em;
+}
+
+/* view modes */
+body[data-mode="edit"] .pane-preview,
+body[data-mode="edit"] .divider { display: none; }
+body[data-mode="edit"] .pane-editor { width: 100%; }
+
+body[data-mode="preview"] .pane-editor,
+body[data-mode="preview"] .divider { display: none; }
+body[data-mode="preview"] .pane-preview { width: 100%; }
+
+body[data-mode="split"] .pane-editor { width: var(--split); flex: none; }
+body[data-mode="split"] .pane-preview { flex: 1; }
+
+/* divider */
+.divider {
+  flex: none;
+  width: 7px;
+  cursor: col-resize;
+  background: var(--paper);
+  border-left: 1px solid var(--hairline);
+  border-right: 1px solid var(--hairline);
+  touch-action: none;
+}
+
+.divider:hover, .divider.dragging { background: var(--ink); }
+
+body.col-resizing { cursor: col-resize; }
+body.col-resizing .CodeMirror { pointer-events: none; }
+
+/* editor / preview bodies */
+.editor-body {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+}
+
+.editor-body .CodeMirror {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+.preview-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--paper);
+}
+
+/* ---- status bar -------------------------------------------------------------- */
+
+.statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  padding: 0.4rem 1rem;
+  border-top: 1px solid var(--hairline);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--gray);
+}
+
+.st-name {
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  max-width: 40vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.st-stats { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0.15rem; }
+
+.st-stats .sep { color: #c9c9c9; margin: 0 0.45rem; }
+
+.st-save { white-space: nowrap; }
+.st-save.st-notice { color: var(--ink); font-weight: 600; }
+
+/* ---- offscreen roots ------------------------------------------------------------ */
+
+#print-root { display: none; }
+
+#png-root {
+  position: fixed;
+  left: -20000px;
+  top: 0;
+  background: var(--paper);
+  z-index: -1;
+}
+
+/* ---- phone ------------------------------------------------------------------------ */
+
+@media (max-width: 767px) {
+
+  .divider { display: none !important; }
+
+  .pane { width: 100% !important; flex: 1 1 auto !important; }
+
+  body[data-mode="split"] .pane-preview { display: none; }
+
+  #mode-split { display: none; }
+
+  .masthead-inner { padding: 0.5rem 0.85rem; }
+
+  .brand { margin-right: 0; width: 100%; }
+
+  .actions { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+
+  .pane-head { padding: 0.25rem 0.85rem; min-height: 44px; }
+
+  .st-name { max-width: 34vw; }
+}
+
+@media (max-width: 430px) {
+  .st-name { display: none; }
+}
