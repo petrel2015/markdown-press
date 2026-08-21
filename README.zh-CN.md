@@ -2,6 +2,7 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
+![Live](https://img.shields.io/badge/live-GitHub_Pages-d52b1e?link=https://petrel2015.github.io/markdown-press/)
 ![Pure Frontend](https://img.shields.io/badge/pure_frontend-no_backend-111111)
 ![Zero Build](https://img.shields.io/badge/zero_build-open_index.html-111111)
 ![Offline](https://img.shields.io/badge/offline-vendored_libs-111111)
@@ -13,6 +14,8 @@ MD·PRESS 是一个纯浏览器本地的 Markdown 编辑器与预览器，承袭
 
 > 💡 **核心目标** —— 左侧书写，右侧阅读，完成后导出。一切都在浏览器本地完成，
 > 不向任何地方发送数据。
+
+**在线体验：<https://petrel2015.github.io/markdown-press/>**
 
 ## 导出
 

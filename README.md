@@ -2,6 +2,7 @@
 
 [English](README.md) | [中文](README.zh-CN.md)
 
+![Live](https://img.shields.io/badge/live-GitHub_Pages-d52b1e?link=https://petrel2015.github.io/markdown-press/)
 ![Pure Frontend](https://img.shields.io/badge/pure_frontend-no_backend-111111)
 ![Zero Build](https://img.shields.io/badge/zero_build-open_index.html-111111)
 ![Offline](https://img.shields.io/badge/offline-vendored_libs-111111)
@@ -14,6 +15,8 @@ accent, no gradients or shadows.
 
 > 💡 **Core goal** — Write on the left, read on the right, export when it is
 > done. Everything runs locally in your browser; nothing is sent anywhere.
+
+**Try it online: <https://petrel2015.github.io/markdown-press/>**
 
 ## Exports
 
