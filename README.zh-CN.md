@@ -154,3 +154,14 @@ node logic.test.js
 - ⚠️ 被 CORS 拦截的远程图片无法进入 PNG 导出；本地与 data-URI 图片不受影响。
 - A4 PDF 有意走浏览器打印对话框 —— 这能保住矢量可选文字，是栅格化方案
   做不到的。
+
+## 请我喝杯咖啡
+
+**请我喝杯咖啡 ￥4.9** ☕
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/donate/alipay-qr.png" width="200" alt="支付宝收款码"><br>支付宝</td>
+    <td align="center"><img src="docs/donate/wechat-qr.png" width="200" alt="微信收款码"><br>微信</td>
+  </tr>
+</table>

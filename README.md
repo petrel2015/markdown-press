@@ -167,3 +167,14 @@ rules and whitespace alone.
   and data-URI images work fine.
 - The A4 PDF path goes through the browser print dialog by design — it keeps
   text vector and selectable, which rasterized alternatives cannot offer.
+
+## Buy Me a Coffee
+
+**Buy me a coffee ￥4.9** ☕
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/donate/alipay-qr.png" width="200" alt="Alipay QR"><br>Alipay</td>
+    <td align="center"><img src="docs/donate/wechat-qr.png" width="200" alt="WeChat QR"><br>WeChat</td>
+  </tr>
+</table>
