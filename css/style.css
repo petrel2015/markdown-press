@@ -41,7 +41,8 @@ html.md-booting .btn,
 html.md-booting .view-switch button,
 html.md-booting .lang-switch button,
 html.md-booting .mini-toggle,
-html.md-booting .fmt {
+html.md-booting .fmt,
+html.md-booting .donate-entry {
   opacity: 0.55;
   cursor: progress;
 }

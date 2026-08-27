@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/editor.css">
   <link rel="stylesheet" href="css/preview.css">
+  <link rel="stylesheet" href="css/donation.css">
   <link rel="stylesheet" href="css/print.css">
   <script>
     /* Runs before any vendored library: mark the shell as booting and
@@ -109,6 +110,7 @@
         <span id="st-lines">—</span>
       </span>
       <span class="st-save" id="st-save" aria-live="polite">—</span>
+      <button type="button" id="donate-entry" class="donate-entry" data-i18n="donateEntry">☕ Buy me a coffee</button>
     </footer>
 
   </div>
@@ -116,6 +118,22 @@
   <div id="print-root" aria-hidden="true"></div>
   <div id="png-root" aria-hidden="true"></div>
   <input type="file" id="file-open" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>
+
+  <!-- Donation dialog: the QR is drawn by js/donation.js after first open;
+       nothing here costs anything until the user asks for it. -->
+  <div class="donation-overlay" id="donation-dialog" hidden>
+    <div class="donation-dialog" role="dialog" aria-modal="true" data-i18n-aria-label="donateTitle" aria-label="Buy me a coffee">
+      <button type="button" class="donation-close" id="donation-close" data-i18n-aria-label="donateClose" aria-label="Close">×</button>
+      <h2 class="donation-title" data-i18n="donateTitle">Buy me a coffee ☕</h2>
+      <p class="donation-subtitle" data-i18n="donateSubtitle">If this little tool helped you, you can buy the author a coffee.</p>
+      <div class="donation-tabs" role="group" data-i18n-aria-label="donateChannelAria" aria-label="Payment method">
+        <button type="button" class="donation-tab active" id="donation-tab-alipay" aria-pressed="true" data-i18n="donateAlipay">Alipay</button>
+        <button type="button" class="donation-tab" id="donation-tab-wechat" aria-pressed="false" data-i18n="donateWechatPay">WeChat Pay</button>
+      </div>
+      <canvas id="donation-qr" class="donation-qr" width="220" height="220" role="img" data-i18n-aria-label="donateQrAria" aria-label="Payment QR code"></canvas>
+      <p class="donation-hint" id="donation-hint" aria-live="polite">Scan with Alipay</p>
+    </div>
+  </div>
 
   <script src="vendor/codemirror.js"></script>
   <script src="vendor/mode-xml.js"></script>
@@ -127,6 +145,7 @@
   <script src="vendor/html-to-image.min.js"></script>
 
   <script src="js/i18n.js"></script>
+  <script src="js/donation.js"></script>
   <script src="js/markdown.js"></script>
   <script src="js/editor.js"></script>
   <script src="js/layout.js"></script>

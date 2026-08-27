@@ -65,6 +65,19 @@
       mermaidError: 'Diagram syntax error',
       bootError: 'Some parts failed to start — reload the page.',
 
+      donateEntry: '☕ Buy me a coffee',
+      donateTitle: 'Buy me a coffee ☕',
+      donateSubtitle: 'If this little tool helped you, you can buy the author a coffee.',
+      donateAlipay: 'Alipay',
+      donateWechatPay: 'WeChat Pay',
+      donateChannelAria: 'Payment method',
+      donateScanAlipay: 'Scan with Alipay',
+      donateScanWechat: 'Scan with WeChat',
+      donateFallbackHint: 'Didn\'t open automatically? Scan the QR code instead.',
+      donateClose: 'Close',
+      donateQrAria: 'Payment QR code',
+      donateQrError: 'Could not generate the QR code — check your connection and retry.',
+
       sampleDoc: [
         '# MD·PRESS',
         '',
@@ -171,6 +184,19 @@
       readFail: '无法读取该文件。',
       mermaidError: '图表语法错误',
       bootError: '部分功能启动失败——请刷新页面重试。',
+
+      donateEntry: '☕ 请作者喝杯咖啡',
+      donateTitle: '请作者喝杯咖啡 ☕',
+      donateSubtitle: '如果这个小工具帮到了你，可以请作者喝杯咖啡。',
+      donateAlipay: '支付宝',
+      donateWechatPay: '微信支付',
+      donateChannelAria: '支付方式',
+      donateScanAlipay: '打开支付宝扫一扫',
+      donateScanWechat: '打开微信扫一扫',
+      donateFallbackHint: '没有自动打开？请使用支付宝 / 微信扫码',
+      donateClose: '关闭',
+      donateQrAria: '收款二维码',
+      donateQrError: '二维码生成失败——请检查网络后重试。',
 
       sampleDoc: [
         '# MD·PRESS',

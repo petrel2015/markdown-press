@@ -4,9 +4,11 @@
   "private": true,
   "description": "jsdom logic tests for MD·PRESS",
   "scripts": {
-    "test": "node logic.test.js"
+    "test": "node logic.test.js && node donation.test.js && node qr-roundtrip.test.js"
   },
   "dependencies": {
-    "jsdom": "^30.0.1"
+    "jsdom": "^30.0.1",
+    "jsqr": "^1.4.0",
+    "pngjs": "^7.0.0"
   }
 }
