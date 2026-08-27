@@ -1,22 +1,23 @@
 /* =====================================================================
-   MD·PRESS — rendered document typography
+   MD·PRESS — rendered document typography (research-report)
    The preview pane, the PNG export and the print sheet all share
    this .md-doc base; only the frame differs.
+   衬线叙事 692px 阅读栏；组件无框化，分组靠发丝线。
    ===================================================================== */
 
 .md-doc {
-  max-width: 46rem;
+  max-width: 692px;
   margin: 0 auto;
-  padding: 2.2rem 1.75rem 5rem;
-  font-size: 1rem;
-  line-height: 1.72;
+  padding: 2.4rem 1.75rem 5rem;
+  font-size: 17px;
+  line-height: 1.7;
   color: var(--ink);
   word-wrap: break-word;
 }
 
 .md-doc:first-child { margin-top: 0; }
 
-/* headings */
+/* headings — serif, hairline rules instead of boxes */
 .md-doc h1, .md-doc h2, .md-doc h3,
 .md-doc h4, .md-doc h5, .md-doc h6 {
   margin: 1.9em 0 0.6em;
@@ -28,41 +29,44 @@
 .md-doc h1 {
   font-size: 2rem;
   margin-top: 0.4rem;
-  padding-bottom: 0.35rem;
-  border-bottom: 3px solid var(--ink);
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--ink);
 }
 
 .md-doc h2 {
-  font-size: 1.4rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid var(--ink);
+  font-size: 1.35rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--line);
 }
 
-.md-doc h3 { font-size: 1.13rem; }
+.md-doc h3 { font-size: 1.15rem; }
 .md-doc h4 { font-size: 1rem; }
-.md-doc h5, .md-doc h6 { font-size: 0.92rem; color: var(--gray); }
+.md-doc h5, .md-doc h6 { font-size: 0.92rem; color: var(--ink-md); }
 
 /* text */
 .md-doc p { margin: 0.85em 0; }
 
 .md-doc a {
-  color: var(--red);
+  color: var(--blue);
   text-decoration: none;
   border-bottom: 1px solid currentColor;
 }
 
-.md-doc a:hover { color: var(--ink); }
+.md-doc a:hover { color: var(--blue-hi); }
 
 .md-doc strong { font-weight: 700; }
 .md-doc em { font-style: italic; }
 
-.md-doc del { color: var(--gray); }
+.md-doc del { color: var(--ink-lo); }
 
+/* blockquote — analyst-note treatment: top & bottom hairlines,
+   no left bar, no fill */
 .md-doc blockquote {
-  margin: 1.3em 0;
-  padding: 0.15em 0 0.15em 1.2em;
-  border-left: 3px solid var(--ink);
-  color: #444444;
+  margin: 1.4em 0;
+  padding: 12px 0 13px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-md);
 }
 
 .md-doc blockquote p { margin: 0.45em 0; }
@@ -71,83 +75,90 @@
 .md-doc ul, .md-doc ol { margin: 0.85em 0; padding-left: 1.5em; }
 .md-doc li { margin: 0.3em 0; }
 .md-doc li > ul, .md-doc li > ol { margin: 0.25em 0; }
-.md-doc li::marker { color: var(--gray); }
+.md-doc li::marker { color: var(--ink-lo); }
 
 .md-doc input[type="checkbox"] {
   margin-right: 0.45em;
-  accent-color: var(--ink);
+  accent-color: var(--blue);
 }
 
-/* code — flat tint, no frame */
+/* code — facts are mono; flat panel tint, no frame */
 .md-doc code {
   font-family: var(--mono);
-  font-size: 0.875em;
-  background: var(--paper-2);
+  font-size: 0.82em;
+  background: var(--paper-hi);
   padding: 0.1em 0.35em;
+  border-radius: 3px;
 }
 
 .md-doc pre {
   margin: 1.25em 0;
   padding: 1rem 1.2rem;
-  background: #f7f7f7;
+  background: var(--paper-hi);
+  border-radius: 6px;
   overflow-x: auto;
   line-height: 1.6;
 }
 
 .md-doc pre code {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   background: none;
   border: none;
   padding: 0;
 }
 
-/* highlight.js — monochrome with a single red accent */
+/* highlight.js — monochrome inks with the single blue accent */
 .hljs { color: var(--ink); background: transparent; }
-.hljs-comment, .hljs-quote { color: #9a9a9a; font-style: italic; }
+.hljs-comment, .hljs-quote { color: var(--ink-lo); font-style: italic; }
 .hljs-keyword, .hljs-selector-tag, .hljs-subst { font-weight: 700; }
-.hljs-string, .hljs-regexp, .hljs-addition { color: #444444; font-style: italic; }
+.hljs-string, .hljs-regexp, .hljs-addition { color: var(--ink-md); font-style: italic; }
 .hljs-number, .hljs-literal, .hljs-symbol { font-weight: 600; }
-.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id { color: var(--red); font-weight: 700; }
-.hljs-attr, .hljs-attribute, .hljs-variable, .hljs-template-variable { color: #555555; }
+.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id { color: var(--blue); font-weight: 700; }
+.hljs-attr, .hljs-attribute, .hljs-variable, .hljs-template-variable { color: var(--ink-md); }
 .hljs-type, .hljs-built_in, .hljs-class { color: var(--ink); font-weight: 600; }
-.hljs-meta { color: #9a9a9a; }
-.hljs-deletion { color: var(--red); }
+.hljs-meta { color: var(--ink-lo); }
+.hljs-deletion { color: var(--neg); }
 .hljs-emphasis { font-style: italic; }
 .hljs-strong { font-weight: 700; }
 
-/* tables — two horizontal rules, quiet rows */
+/* tables — data-table recipe: horizontal hairlines only,
+   mono small-caps headers, no zebra, no verticals */
 .md-doc table {
   margin: 1.5em 0;
   border-collapse: collapse;
   width: 100%;
-  font-size: 0.93em;
+  font-size: 0.9em;
 }
 
 .md-doc th {
-  border-top: 2px solid var(--ink);
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--line);
   text-align: left;
-  font-weight: 700;
-  padding: 0.5em 0.75em;
+  font-family: var(--mono);
+  font-size: 0.68em;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-lo);
+  padding: 0.55em 0.75em 0.55em 0;
 }
 
 .md-doc td {
-  border-bottom: 1px solid #efefef;
-  padding: 0.5em 0.75em;
+  border-bottom: 1px solid var(--line-lo);
+  padding: 0.55em 0.75em 0.55em 0;
   vertical-align: top;
 }
 
 /* rules & media */
 .md-doc hr {
   border: 0;
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--line-lo);
   margin: 2.2em 0;
 }
 
 .md-doc img { max-width: 100%; height: auto; display: block; margin: 1.2em auto; }
 
 /* mermaid — the diagram speaks for itself, no frame;
-   errors get a red left rule like a blockquote */
+   errors are the one negative-semantic use of red */
 .md-doc .mermaid-block {
   margin: 1.7em 0;
   padding: 0;
@@ -158,16 +169,18 @@
 .md-doc .mermaid-block svg { max-width: 100%; }
 
 .md-doc .mermaid-block[data-done="error"] {
-  border-left: 3px solid var(--red);
-  padding-left: 1.1rem;
+  border-top: 1px solid var(--neg);
+  border-bottom: 1px solid var(--neg);
+  padding: 12px 0;
   text-align: left;
 }
 
 .md-doc .mermaid-error {
-  color: var(--red);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  color: var(--neg);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.6rem;

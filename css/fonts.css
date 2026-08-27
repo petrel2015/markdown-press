@@ -1,0 +1,30 @@
+/* =====================================================================
+   MD·PRESS — research-report skin · fonts
+   ET Book (tufte-css, SIL OFL 1.1) vendored locally: 3 faces only.
+   Latin glyphs only — CJK falls back to Noto Serif SC / Songti via
+   the --serif stack in tokens.css. See fonts/LICENSE-et-book.txt.
+   ===================================================================== */
+
+@font-face {
+  font-family: "et-book";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/et-book-roman-line-figures.woff) format("woff");
+}
+
+@font-face {
+  font-family: "et-book";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/et-book-display-italic-figures.woff) format("woff");
+}
+
+@font-face {
+  font-family: "et-book";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../fonts/et-book-bold-line-figures.woff) format("woff");
+}

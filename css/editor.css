@@ -1,12 +1,12 @@
 /* =====================================================================
-   MD·PRESS — CodeMirror skin
-   Neutral Swiss monochrome; the only accent is the red caret.
+   MD·PRESS — CodeMirror skin (research-report)
+   等宽事实区：墨阶文字，唯一强调是电光蓝光标；语法角色只用墨的浓淡。
    ===================================================================== */
 
 .CodeMirror {
   font-family: var(--mono);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.7;
   color: var(--ink);
   background: var(--paper);
 }
@@ -15,38 +15,39 @@
 .CodeMirror pre.CodeMirror-line { padding: 0 1rem; }
 
 .CodeMirror-gutters {
-  border-right: 1px solid var(--hairline);
+  border-right: 1px solid var(--line-lo);
   background: var(--paper);
 }
 
 .CodeMirror-linenumber {
-  color: #b5b5b5;
-  font-size: 0.72rem;
+  color: var(--ink-lo);
+  font-size: 0.7rem;
   padding: 0 0.5rem 0 0.6rem;
+  font-variant-numeric: tabular-nums;
 }
 
-.CodeMirror-cursor { border-left: 2px solid var(--red); }
+.CodeMirror-cursor { border-left: 2px solid var(--blue); }
 
-.CodeMirror-selected { background: #dddddd; }
-.CodeMirror-focused .CodeMirror-selected { background: #d2d2d2; }
-.CodeMirror-activeline-background { background: #f6f6f6; }
+.CodeMirror-selected { background: rgba(34, 81, 255, .08); }
+.CodeMirror-focused .CodeMirror-selected { background: rgba(34, 81, 255, .14); }
+.CodeMirror-activeline-background { background: var(--paper-hi); }
 
-/* markdown tokens — quiet gray for syntax, ink for prose */
-.cm-header { font-weight: 700; }
+/* markdown tokens — ink scale for prose, blue only for links & tags */
+.cm-header { font-weight: 700; color: var(--ink); }
 .cm-header-1 { font-size: 1.2em; }
 .cm-header-2 { font-size: 1.1em; }
 .cm-strong { font-weight: 700; }
 .cm-em { font-style: italic; }
-.cm-formatting { color: #b0b0b0; }
-.cm-quote { color: #555555; }
-.cm-link { color: var(--red); }
-.cm-url { color: #8a8a8a; }
-.cm-comment { color: #8a8a8a; }
-.cm-keyword { color: #8a8a8a; }
-.cm-string { color: #555555; }
-.cm-variable-2, .cm-variable-3, .cm-type { color: #555555; }
-.cm-tag { color: var(--red); }
-.cm-atom, .cm-number { color: #555555; }
-.cm-hr { color: var(--ink); }
+.cm-formatting { color: var(--ink-lo); }
+.cm-quote { color: var(--ink-md); }
+.cm-link { color: var(--blue); }
+.cm-url { color: var(--ink-lo); }
+.cm-comment { color: var(--ink-lo); }
+.cm-keyword { color: var(--ink-lo); }
+.cm-string { color: var(--ink-md); }
+.cm-variable-2, .cm-variable-3, .cm-type { color: var(--ink-md); }
+.cm-tag { color: var(--blue); }
+.cm-atom, .cm-number { color: var(--ink-md); }
+.cm-hr { color: var(--ink-md); }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background: var(--paper); }

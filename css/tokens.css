@@ -1,0 +1,43 @@
+/* =====================================================================
+   MD·PRESS — research-report skin · design tokens
+   白纸墨阶 + 单一电光蓝强调 + 发丝线；衬线叙事，等宽事实。
+   Distilled from the research-report-style skill (asic42 / ET Book /
+   Tufte lineage). Values ARE the style — reuse names, do not retune.
+   ===================================================================== */
+
+:root {
+  /* 纸面 */
+  --paper: #ffffff;
+  --paper-hi: #f7f9fc;           /* panels / hover wash */
+
+  /* 墨阶 — text only ever uses these three inks */
+  --ink: #051c2c;                /* deep navy ink */
+  --ink-md: #42566a;
+  --ink-lo: #8595a6;
+
+  /* 发丝线 */
+  --line: #dbe2ea;
+  --line-lo: #eef1f6;
+
+  /* 强调色 — the only accent on the page */
+  --blue: #2251ff;
+  --blue-hi: #1233b8;
+  --blue-lo: #7d9bff;
+
+  /* 语义负面 — only for errors / loss / risk */
+  --neg: #c22f4e;
+
+  /* 来源分类徽章专用（正文与图表禁止挪用） */
+  --green: #008a6d;              /* 官方 / 许可文件 */
+  --copper: #b07a10;             /* 行业数据库 */
+  --violet: #7a45c9;             /* 新闻 / 档案 */
+
+  /* 字体两声部：衬线讲人话，等宽讲机器话。
+     --sans intentionally aliases the serif (editorial choice). */
+  --serif: "et-book", "Noto Serif SC", "Songti SC", "SimSun", "Iowan Old Style", Palatino, Georgia, serif;
+  --sans: var(--serif);
+  --mono: Menlo, Consolas, "SF Mono", monospace;
+
+  /* the one shallow shadow allowed (floating overlays only) */
+  --shadow: 0 1px 2px rgba(5, 28, 44, .05), 0 8px 28px rgba(5, 28, 44, .07);
+}

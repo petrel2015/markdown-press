@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Markdown editor and preview with Mermaid support, A4 / phone export. Markdown 编辑器与预览，支持 Mermaid 与 A4 / 手机长图导出。">
   <title>MD·PRESS — Markdown Editor</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23d52b1e'/%3E%3Ctext x='16' y='22' font-family='Helvetica, Arial, sans-serif' font-size='13' font-weight='700' fill='%23fff' text-anchor='middle'%3EMD%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%232251ff'/%3E%3Ctext x='16' y='22' font-family='Georgia, Times, serif' font-size='13' font-weight='700' fill='%23fff' text-anchor='middle'%3EMD%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="vendor/codemirror.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/editor.css">
   <link rel="stylesheet" href="css/preview.css">
@@ -114,6 +116,53 @@
     </footer>
 
   </div>
+
+  <!-- Methodology footer (research-report skin): analyst notes on how the
+       tool works, a source/credits table, and the disclaimer. Scroll-only
+       region — the tool above keeps its fixed viewport behaviour. -->
+  <section class="rr-footer" data-i18n-aria-label="methAria" aria-label="Methodology and notes">
+    <div class="rr-foot-inner">
+      <p class="rr-kicker" data-i18n="methKicker">Methodology &amp; notes</p>
+      <h2 class="rr-title" data-i18n="methTitle">How this page works</h2>
+      <p class="rr-lede" data-i18n="methLede">Everything happens on your machine.</p>
+
+      <div class="rr-notes">
+        <div class="rr-note">
+          <p class="rr-note-k" data-i18n="methRenderK">Rendering</p>
+          <p data-i18n="methRenderB">Markdown is parsed and highlighted in the browser.</p>
+        </div>
+        <div class="rr-note">
+          <p class="rr-note-k" data-i18n="methExportK">Export</p>
+          <p data-i18n="methExportB">PDF via the print pipeline, PNG rasterised locally.</p>
+        </div>
+        <div class="rr-note">
+          <p class="rr-note-k" data-i18n="methPrivacyK">Privacy</p>
+          <p data-i18n="methPrivacyB">localStorage only — no account, no analytics.</p>
+        </div>
+      </div>
+
+      <table class="rr-credits">
+        <thead>
+          <tr>
+            <th data-i18n="methColComp">Component</th>
+            <th data-i18n="methColRole">Role</th>
+            <th>License</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>CodeMirror</td><td data-i18n="methRdEditor">Source editor</td><td class="rr-lic">MIT</td></tr>
+          <tr><td>marked</td><td data-i18n="methRdMd">Markdown → HTML</td><td class="rr-lic">MIT</td></tr>
+          <tr><td>highlight.js</td><td data-i18n="methRdHl">Code highlighting</td><td class="rr-lic">BSD-3</td></tr>
+          <tr><td>mermaid</td><td data-i18n="methRdDiag">Diagrams</td><td class="rr-lic">MIT</td></tr>
+          <tr><td>html-to-image</td><td data-i18n="methRdPng">PNG rasterisation</td><td class="rr-lic">MIT</td></tr>
+          <tr><td>qrcode-generator</td><td data-i18n="methRdQr">Donation QR codes</td><td class="rr-lic">MIT</td></tr>
+          <tr><td>ET Book</td><td data-i18n="methRdFont">Typeface · via tufte-css</td><td class="rr-lic">OFL-1.1</td></tr>
+        </tbody>
+      </table>
+
+      <p class="rr-disc" data-i18n="methDisc">Provided as-is; keep your own backups.</p>
+    </div>
+  </section>
 
   <div id="print-root" aria-hidden="true"></div>
   <div id="png-root" aria-hidden="true"></div>

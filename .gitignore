@@ -8,3 +8,8 @@ test/qr-sample-*.png
 
 # local security-hook state
 .mimosa/
+
+# local screenshot / visual-verify harness artifacts
+tools/node_modules/
+tools/shots/
+tools/package-lock.json

@@ -1,0 +1,17 @@
+ET Book — vendored font faces (research-report skin)
+======================================================
+
+Source ...: https://github.com/edwardtufte/tufte-css  (et-book/ directory)
+License ..: SIL Open Font License 1.1 — free to embed, redistribute
+            and use in commercial projects. Full text:
+            https://openfontlicense.org/open-font-license-official-text/
+
+Faces bundled (only the three this app needs, woff only):
+
+  et-book-roman-line-figures.woff          400 normal
+  et-book-display-italic-figures.woff      400 italic
+    (upstream name: et-book-display-italic-old-style-figures)
+  et-book-bold-line-figures.woff           700 normal
+
+Latin glyphs only — CJK text falls back to Noto Serif SC / Songti SC /
+SimSun via the --serif stack in css/tokens.css.

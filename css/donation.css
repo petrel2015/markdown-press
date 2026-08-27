@@ -1,8 +1,8 @@
 /* =====================================================================
-   MD·PRESS — donation dialog
-   「请作者喝杯咖啡」: reuses the shell's variables (paper, ink, hairline,
-   one red accent) so the dialog reads as native to the site. The QR
-   itself stays near-black on white — scan success beats theme unity.
+   MD·PRESS — donation dialog (research-report skin)
+   「请作者喝杯咖啡」: reuses the shell's tokens (paper, ink, hairline,
+   the single electric-blue accent) so the dialog reads as native.
+   The QR itself stays near-black on white — scan success beats theme.
    ===================================================================== */
 
 /* footer entry: the quietest control on the status bar */
@@ -10,17 +10,17 @@
   appearance: none;
   border: 0;
   background: transparent;
-  font: inherit;
-  font-size: 0.72rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
   letter-spacing: 0.04em;
-  color: var(--gray);
+  color: var(--ink-lo);
   min-height: 34px;
   padding: 0 0.4rem;
   cursor: pointer;
   white-space: nowrap;
 }
 
-.donate-entry:hover { color: var(--red); }
+.donate-entry:hover { color: var(--blue); }
 
 .donation-overlay {
   position: fixed;
@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(17, 17, 17, 0.45);
+  background: rgba(5, 28, 44, 0.45);
 }
 
 /* display:flex above outranks the UA's [hidden] rule — restate it */
@@ -39,10 +39,12 @@
 .donation-dialog {
   position: relative;
   width: min(360px, calc(100vw - 48px));
-  padding: 26px 24px 22px;
+  padding: 28px 24px 24px;
   text-align: center;
   background: var(--paper);
-  border: 1px solid var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
 }
 
 .donation-close {
@@ -54,59 +56,62 @@
   appearance: none;
   border: 0;
   background: transparent;
-  font: inherit;
+  font-family: var(--serif);
   font-size: 18px;
   line-height: 1;
-  color: var(--gray);
+  color: var(--ink-lo);
   cursor: pointer;
 }
 
-.donation-close:hover { color: var(--red); }
+.donation-close:hover { color: var(--blue); }
 
 .donation-title {
   margin: 0 0 6px;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   color: var(--ink);
 }
 
 .donation-subtitle {
   margin: 0 0 18px;
-  font-size: 0.8rem;
-  color: var(--gray);
+  font-size: 0.86rem;
+  color: var(--ink-md);
 }
 
-/* channel switch: native buttons, boxed like the export menu */
+/* channel switch: two chips, active floods electric blue */
 .donation-tabs {
   display: inline-flex;
+  gap: 8px;
   margin-bottom: 18px;
-  border: 1px solid var(--ink);
 }
 
 .donation-tab {
   appearance: none;
-  border: 0;
-  padding: 8px 18px;
-  font: inherit;
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  padding: 7px 16px;
+  font-family: var(--serif);
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--ink);
   background: var(--paper);
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
   cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
 }
 
-.donation-tab + .donation-tab { border-left: 1px solid var(--ink); }
-
-.donation-tab:hover { color: var(--red); }
+.donation-tab:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+}
 
 .donation-tab.active {
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--blue);
+  border-color: var(--blue);
+  color: #fff;
 }
 
-.donation-tab.active:hover { color: var(--paper); }
+.donation-tab.active:hover { background: var(--blue-hi); border-color: var(--blue-hi); color: #fff; }
 
 /* the QR itself: white card + near-black modules, quiet zone drawn in */
 .donation-qr {
@@ -115,14 +120,16 @@
   height: auto;
   margin: 0 auto;
   background: #ffffff;
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--line-lo);
+  border-radius: 6px;
   image-rendering: pixelated;
 }
 
 .donation-hint {
   margin: 14px 0 0;
-  font-size: 0.75rem;
-  color: var(--gray);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-lo);
 }
 
 /* phone: tighter margins, larger touch targets, no horizontal scroll */
