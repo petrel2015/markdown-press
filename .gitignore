@@ -4,3 +4,6 @@ test/node_modules/
 # OS / editor
 .DS_Store
 *.log
+
+# local security-hook state
+.mimosa/
