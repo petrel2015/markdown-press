@@ -173,6 +173,10 @@
   /* ---- boot ------------------------------------------------------------------------ */
 
   function boot() {
+    var rootClass = global.document.documentElement;
+    rootClass.className = (' ' + rootClass.className + ' ')
+      .replace(' md-booting ', ' ').trim();
+
     els.preview = $('preview');
     els.stPos = $('st-pos');
     els.stWords = $('st-words');
@@ -183,36 +187,46 @@
     els.exportMenu = $('export-menu');
     els.btnExport = $('btn-export');
 
-    MD.i18n.apply();
-    MD.markdown.initMermaid();
-    MD.editor.init($('editor-source'));
-    MD.editor.setValue(loadDoc());
-    MD.layout.init();
-    MD.exporter.init({
-      getSource: function () { return MD.editor.getValue(); },
-      getFilename: function () { return docName; },
-      notify: notify,
-      onFileOpen: replaceDocument
-    });
+    /* Boot in fault-isolated stages: a broken optional piece must not
+       kill the controls. */
+    try {
+      MD.i18n.apply();
+      MD.markdown.initMermaid();
+      MD.editor.init($('editor-source'));
+      MD.editor.setValue(loadDoc());
+    } catch (e) { recordBootError(e); }
 
-    MD.editor.onChange(onSourceChange);
-    MD.editor.onCursor(updateStats);
+    try {
+      MD.layout.init();
+    } catch (e) { recordBootError(e); }
 
-    /* formatting toolbar */
-    [['fmt-bold', 'bold'], ['fmt-italic', 'italic'], ['fmt-code', 'code'],
-     ['fmt-link', 'link'], ['fmt-list', 'list'], ['fmt-mermaid', 'mermaid']]
-      .forEach(function (pair) {
-        var b = $(pair[0]);
-        if (b) b.addEventListener('click', function () { MD.editor.format(pair[1]); });
+    try {
+      MD.exporter.init({
+        getSource: function () { return MD.editor.getValue(); },
+        getFilename: function () { return docName; },
+        notify: notify,
+        onFileOpen: replaceDocument
       });
 
-    /* new document */
-    var btnNew = $('btn-new');
-    if (btnNew) {
-      btnNew.addEventListener('click', function () {
-        if (global.confirm(MD.i18n.t('confirmNew'))) replaceDocument('', 'document');
-      });
-    }
+      MD.editor.onChange(onSourceChange);
+      MD.editor.onCursor(updateStats);
+
+      /* formatting toolbar */
+      [['fmt-bold', 'bold'], ['fmt-italic', 'italic'], ['fmt-code', 'code'],
+       ['fmt-link', 'link'], ['fmt-list', 'list'], ['fmt-mermaid', 'mermaid']]
+        .forEach(function (pair) {
+          var b = $(pair[0]);
+          if (b) b.addEventListener('click', function () { MD.editor.format(pair[1]); });
+        });
+
+      /* new document */
+      var btnNew = $('btn-new');
+      if (btnNew) {
+        btnNew.addEventListener('click', function () {
+          if (global.confirm(MD.i18n.t('confirmNew'))) replaceDocument('', 'document');
+        });
+      }
+    } catch (e) { recordBootError(e); }
 
     /* CodeMirror measures wrong while a pane is display:none —
        refresh it whenever the layout re-exposes the editor. */
@@ -226,8 +240,10 @@
       });
     }
 
-    initExportMenu();
-    initLangSwitch();
+    try {
+      initExportMenu();
+      initLangSwitch();
+    } catch (e) { recordBootError(e); }
 
     renderNow();
     updateStats();
@@ -235,11 +251,37 @@
     paintSave();
     persistDoc(); /* first run: sample doc becomes the stored doc */
 
+    flushBootQueue(global.MD_BOOT_QUEUE);
+    global.MD_BOOT_QUEUE = null;
+
     global.addEventListener('beforeunload', function () { persistDoc(); });
     global.addEventListener('resize', function () {
       global.setTimeout(MD.editor.refresh, 50);
     });
   }
+
+  function recordBootError(e) {
+    if (global.console) global.console.error('MD·PRESS boot:', e);
+    bootFailed = true;
+    try {
+      els.stSave.textContent = MD.i18n.t('bootError');
+      els.stSave.className = 'st-save st-notice';
+    } catch (err) { /* status bar unavailable */ }
+  }
+
+  /* Clicks that landed before listeners existed are replayed once —
+     only the most recent target, within a short grace window. */
+  function flushBootQueue(queue) {
+    try {
+      if (!queue || !queue.length || bootFailed) return;
+      var last = queue[queue.length - 1];
+      if (Date.now() - last.t > 15000) return;
+      var btn = global.document.getElementById(last.id);
+      if (btn) btn.click();
+    } catch (e) { /* replay is best-effort */ }
+  }
+
+  var bootFailed = false;
 
   if (global.document.readyState === 'loading') {
     global.document.addEventListener('DOMContentLoaded', boot);

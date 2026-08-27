@@ -63,6 +63,7 @@
       openFail: 'Only .md, .markdown or .txt files are supported.',
       readFail: 'Could not read that file.',
       mermaidError: 'Diagram syntax error',
+      bootError: 'Some parts failed to start — reload the page.',
 
       sampleDoc: [
         '# MD·PRESS',
@@ -169,6 +170,7 @@
       openFail: '仅支持 .md、.markdown 或 .txt 文件。',
       readFail: '无法读取该文件。',
       mermaidError: '图表语法错误',
+      bootError: '部分功能启动失败——请刷新页面重试。',
 
       sampleDoc: [
         '# MD·PRESS',

@@ -11,6 +11,23 @@
   <link rel="stylesheet" href="css/editor.css">
   <link rel="stylesheet" href="css/preview.css">
   <link rel="stylesheet" href="css/print.css">
+  <script>
+    /* Runs before any vendored library: mark the shell as booting and
+       capture clicks on controls that arrive before listeners exist, so
+       a slow connection cannot swallow them silently. */
+    (function () {
+      document.documentElement.className += ' md-booting';
+      var q = [];
+      document.addEventListener('click', function (e) {
+        var b = e.target && e.target.closest ? e.target.closest('button') : null;
+        if (b && b.id) {
+          q.push({ id: b.id, t: Date.now() });
+          if (q.length > 12) q.shift();
+        }
+      }, true);
+      window.MD_BOOT_QUEUE = q;
+    })();
+  </script>
 </head>
 <body data-mode="split">
 
@@ -107,7 +124,6 @@
   <script src="vendor/addon-active-line.js"></script>
   <script src="vendor/marked.min.js"></script>
   <script src="vendor/highlight.min.js"></script>
-  <script src="vendor/mermaid.min.js"></script>
   <script src="vendor/html-to-image.min.js"></script>
 
   <script src="js/i18n.js"></script>

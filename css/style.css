@@ -34,6 +34,18 @@ body {
 
 ::selection { background: var(--ink); color: var(--paper); }
 
+/* booting: controls visible but dimmed with a progress cursor until
+   the app has finished wiring listeners — pre-boot clicks are captured
+   and replayed by app.js instead of vanishing. */
+html.md-booting .btn,
+html.md-booting .view-switch button,
+html.md-booting .lang-switch button,
+html.md-booting .mini-toggle,
+html.md-booting .fmt {
+  opacity: 0.55;
+  cursor: progress;
+}
+
 .vh {
   position: absolute;
   width: 1px; height: 1px;

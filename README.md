@@ -132,6 +132,14 @@ status-bar statistics.
   innerHTML → mermaid.render swaps fenced placeholders for SVG`. Mermaid code
   is stored URI-encoded in `data-src`; if the mermaid library is missing the
   raw source stays visible as a graceful fallback.
+- **Lazy diagrams** — the 3.3MB mermaid bundle is not loaded up front; it is
+  injected once on demand when the document contains its first ```` ```mermaid ````
+  fence, so the editor becomes interactive ~88% sooner on slow connections.
+- **Startup resilience** — an inline head script dims the controls while the
+  app boots and captures clicks that arrive before listeners exist; when boot
+  finishes, the most recent such click is replayed once instead of vanishing.
+  Boot runs in fault-isolated stages, so one broken piece cannot take down the
+  rest (a status-bar notice appears if any stage fails).
 - **Export pipelines** — print clones the live preview into `#print-root` and
   calls `window.print()`; PNG builds a hidden offscreen container at the
   target width, re-renders diagrams, waits for images, then rasterizes with

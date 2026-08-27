@@ -46,6 +46,9 @@ function check(name, cond, extra) {
 }
 
 (async () => {
+  // 测试环境禁止 mermaid 懒加载注入网络脚本（走缺库降级路径）
+  window.MD_ALLOW_LAZY = false;
+
   // 脚本注入时 jsdom 仍处于 loading，boot 挂在 DOMContentLoaded 上 —— 先等它完成
   if (document.readyState === 'loading') {
     await new Promise((r) => document.addEventListener('DOMContentLoaded', r));
