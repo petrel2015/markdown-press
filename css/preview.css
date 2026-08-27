@@ -78,20 +78,18 @@
   accent-color: var(--ink);
 }
 
-/* code */
+/* code — flat tint, no frame */
 .md-doc code {
   font-family: var(--mono);
   font-size: 0.875em;
-  background: #f4f4f4;
-  border: 1px solid var(--hairline);
-  padding: 0.08em 0.35em;
+  background: var(--paper-2);
+  padding: 0.1em 0.35em;
 }
 
 .md-doc pre {
   margin: 1.25em 0;
   padding: 1rem 1.2rem;
   background: #f7f7f7;
-  border: 1px solid var(--hairline);
   overflow-x: auto;
   line-height: 1.6;
 }
@@ -117,7 +115,7 @@
 .hljs-emphasis { font-style: italic; }
 .hljs-strong { font-weight: 700; }
 
-/* tables */
+/* tables — two horizontal rules, quiet rows */
 .md-doc table {
   margin: 1.5em 0;
   border-collapse: collapse;
@@ -127,41 +125,43 @@
 
 .md-doc th {
   border-top: 2px solid var(--ink);
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 1px solid var(--hairline);
   text-align: left;
   font-weight: 700;
   padding: 0.5em 0.75em;
 }
 
 .md-doc td {
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid #efefef;
   padding: 0.5em 0.75em;
   vertical-align: top;
 }
 
-.md-doc tr:last-child td { border-bottom: 2px solid var(--ink); }
-
 /* rules & media */
 .md-doc hr {
   border: 0;
-  border-top: 1px solid var(--ink);
+  border-top: 1px solid var(--hairline);
   margin: 2.2em 0;
 }
 
 .md-doc img { max-width: 100%; height: auto; display: block; margin: 1.2em auto; }
 
-/* mermaid */
+/* mermaid — the diagram speaks for itself, no frame;
+   errors get a red left rule like a blockquote */
 .md-doc .mermaid-block {
   margin: 1.7em 0;
-  padding: 1.3rem 1rem;
-  border: 1px solid var(--hairline);
+  padding: 0;
   text-align: center;
   overflow-x: auto;
 }
 
 .md-doc .mermaid-block svg { max-width: 100%; }
 
-.md-doc .mermaid-block[data-done="error"] { border-color: var(--red); }
+.md-doc .mermaid-block[data-done="error"] {
+  border-left: 3px solid var(--red);
+  padding-left: 1.1rem;
+  text-align: left;
+}
 
 .md-doc .mermaid-error {
   color: var(--red);

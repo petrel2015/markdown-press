@@ -16,7 +16,7 @@
 
 .CodeMirror-gutters {
   border-right: 1px solid var(--hairline);
-  background: #fafafa;
+  background: var(--paper);
 }
 
 .CodeMirror-linenumber {
