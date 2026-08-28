@@ -169,6 +169,75 @@
     }
   }
 
+  /* ---- focus mode --------------------------------------------------------
+     Immersive editing / reading: hides the masthead, pane heads and the
+     status bar; the browser fullscreen API is engaged when available.
+     Escape or the floating exit pill always restores the chrome. State
+     persists like mode/split, but fullscreen is never requested without a
+     user gesture (i.e. not on page load). */
+
+  var FOCUS_KEY = 'mdpress-focus';
+  var focusOn = false;
+
+  function applyFocus() {
+    global.document.body.setAttribute('data-focus', focusOn ? 'on' : 'off');
+    if (els.btnFocus) els.btnFocus.setAttribute('aria-pressed', String(focusOn));
+  }
+
+  function refreshEditorSoon() {
+    /* hiding the chrome changes pane heights — CodeMirror must re-measure */
+    global.setTimeout(function () {
+      if (global.MD && MD.editor && MD.editor.refresh) MD.editor.refresh();
+    }, 0);
+  }
+
+  function requestBrowserFullscreen(on) {
+    var doc = global.document;
+    var root = doc.documentElement;
+    try {
+      if (!doc.fullscreenEnabled) return; /* unsupported (jsdom) or blocked */
+      if (on && !doc.fullscreenElement && root.requestFullscreen) {
+        var p = root.requestFullscreen();
+        if (p && p.catch) p.catch(function () { /* best-effort */ });
+      } else if (!on && doc.fullscreenElement && doc.exitFullscreen) {
+        var q = doc.exitFullscreen();
+        if (q && q.catch) q.catch(function () { /* best-effort */ });
+      }
+    } catch (e) { /* fullscreen is best-effort */ }
+  }
+
+  function setFocus(on) {
+    focusOn = !!on;
+    persist(FOCUS_KEY, focusOn ? 'on' : 'off');
+    applyFocus();
+    requestBrowserFullscreen(focusOn);
+    refreshEditorSoon();
+  }
+
+  function initFocus() {
+    els.btnFocus = global.document.getElementById('btn-focus');
+    els.btnFocusExit = global.document.getElementById('btn-focus-exit');
+
+    if (els.btnFocus) {
+      els.btnFocus.addEventListener('click', function () { setFocus(!focusOn); });
+    }
+    if (els.btnFocusExit) {
+      els.btnFocusExit.addEventListener('click', function () { setFocus(false); });
+    }
+    global.document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && focusOn) setFocus(false);
+    });
+    global.document.addEventListener('fullscreenchange', function () {
+      /* the browser left fullscreen on its own (e.g. its own Esc) — follow */
+      if (!global.document.fullscreenElement && focusOn) setFocus(false);
+    });
+
+    try {
+      focusOn = global.localStorage && global.localStorage.getItem(FOCUS_KEY) === 'on';
+    } catch (e) { focusOn = false; }
+    applyFocus();
+  }
+
   /* ---- init ------------------------------------------------------------- */
 
   function init() {
@@ -189,6 +258,7 @@
 
     initDivider();
     initSync();
+    initFocus();
     applySplit();
     applyMode();
 
@@ -212,6 +282,8 @@
     setSplit: setSplit,
     effectiveMode: effectiveMode,
     clampSplit: clampSplit,
-    isPhoneViewport: isPhoneViewport
+    isPhoneViewport: isPhoneViewport,
+    setFocus: setFocus,
+    getFocus: function () { return focusOn; }
   };
 }(typeof window !== 'undefined' ? window : globalThis));

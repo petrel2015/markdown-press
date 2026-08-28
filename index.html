@@ -115,9 +115,14 @@
       </span>
       <span class="st-save" id="st-save" aria-live="polite">—</span>
       <button type="button" id="donate-entry" class="donate-entry" data-i18n="donateEntry">☕ Buy me a coffee</button>
+      <button type="button" id="btn-focus" class="focus-entry" data-i18n="btnFocus" data-i18n-aria-label="focusAria" aria-pressed="false" title="Esc">Focus</button>
     </footer>
 
   </div>
+
+  <!-- Immersive mode exit pill: only rendered while body[data-focus="on"];
+       Escape always works too. -->
+  <button type="button" id="btn-focus-exit" class="focus-exit" data-i18n="focusExit" data-i18n-aria-label="focusExitAria">Exit</button>
 
   <div id="print-root" aria-hidden="true"></div>
   <div id="png-root" aria-hidden="true"></div>

@@ -78,6 +78,11 @@
       donateQrAria: 'Payment QR code',
       donateQrError: 'Could not generate the QR code — check your connection and retry.',
 
+      btnFocus: 'Focus',
+      focusAria: 'Toggle immersive mode',
+      focusExit: 'Exit',
+      focusExitAria: 'Exit immersive mode (Esc)',
+
       sampleDoc: [
         '# MD·PRESS',
         '',
@@ -197,6 +202,11 @@
       donateClose: '关闭',
       donateQrAria: '收款二维码',
       donateQrError: '二维码生成失败——请检查网络后重试。',
+
+      btnFocus: '沉浸',
+      focusAria: '切换沉浸模式',
+      focusExit: '退出',
+      focusExitAria: '退出沉浸模式（Esc）',
 
       sampleDoc: [
         '# MD·PRESS',

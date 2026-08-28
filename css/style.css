@@ -35,7 +35,8 @@ html.md-booting .view-switch button,
 html.md-booting .lang-switch button,
 html.md-booting .mini-toggle,
 html.md-booting .fmt,
-html.md-booting .donate-entry {
+html.md-booting .donate-entry,
+html.md-booting .focus-entry {
   opacity: 0.55;
   cursor: progress;
 }
@@ -425,6 +426,61 @@ textarea { color: var(--ink); font-family: var(--mono); }
 
 .st-save { white-space: nowrap; }
 .st-save.st-notice { color: var(--brand); font-weight: 700; }
+
+/* focus entry: the quietest toggle on the bar, same recipe as donate-entry */
+.focus-entry {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-lo);
+  min-height: 34px;
+  padding: 0 0.4rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.focus-entry:hover { color: var(--brand); }
+.focus-entry[aria-pressed="true"] { color: var(--brand); }
+
+/* ---- immersive (focus) mode ------------------------------------------------
+   body[data-focus="on"] strips the chrome; panes keep their behaviour.
+   The exit pill lives outside .app so it survives the strip. */
+
+body[data-focus="on"] .masthead,
+body[data-focus="on"] .pane-head,
+body[data-focus="on"] .statusbar { display: none; }
+
+.focus-exit {
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 12px;
+  z-index: 70;
+  appearance: none;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-lo);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 13px;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity .15s, color .15s, border-color .15s;
+}
+
+body[data-focus="on"] .focus-exit { display: inline-flex; }
+
+.focus-exit:hover {
+  opacity: 1;
+  color: var(--brand);
+  border-color: var(--brand);
+}
 
 /* ---- offscreen roots ------------------------------------------------------------ */
 

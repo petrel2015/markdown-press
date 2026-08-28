@@ -151,7 +151,37 @@ const ok = (name, cond, extra) => {
   ok('捐赠 tab 胶囊', don.radius === '999px', don.radius);
   await page.click('#donation-close');
 
-  // 11. geometry: the tool is the whole document — fills viewport, no extra scroll
+  // 11. immersive focus mode: chrome strips, exit pill shows, Esc restores
+  await page.click('#btn-focus');
+  await page.waitForTimeout(250);
+  const focusState = await page.evaluate(() => ({
+    attr: document.body.getAttribute('data-focus'),
+    masthead: getComputedStyle(document.querySelector('.masthead')).display,
+    heads: getComputedStyle(document.querySelector('.pane-head')).display,
+    statusbar: getComputedStyle(document.querySelector('.statusbar')).display,
+    exit: getComputedStyle(document.querySelector('.focus-exit')).display,
+  }));
+  ok('沉浸模式开启(data-focus=on)', focusState.attr === 'on', focusState.attr);
+  ok('导航/题头/状态栏已隐藏', focusState.masthead === 'none' &&
+    focusState.heads === 'none' && focusState.statusbar === 'none', JSON.stringify(focusState));
+  ok('退出胶囊可见', focusState.exit !== 'none', focusState.exit);
+
+  await page.keyboard.press('Escape');
+  await page.waitForTimeout(250);
+  const escOff = await page.evaluate(() => document.body.getAttribute('data-focus'));
+  ok('Esc 退出沉浸模式', escOff === 'off', escOff);
+
+  await page.click('#btn-focus');
+  await page.waitForTimeout(150);
+  await page.click('#btn-focus-exit');
+  await page.waitForTimeout(150);
+  const pillOff = await page.evaluate(() => ({
+    attr: document.body.getAttribute('data-focus'),
+    masthead: getComputedStyle(document.querySelector('.masthead')).display,
+  }));
+  ok('退出胶囊恢复导航', pillOff.attr === 'off' && pillOff.masthead !== 'none');
+
+  // 12. geometry: the tool is the whole document — fills viewport, no extra scroll
   const geom = await page.evaluate(() => ({
     appBottom: document.querySelector('.app').getBoundingClientRect().bottom,
     vh: window.innerHeight,

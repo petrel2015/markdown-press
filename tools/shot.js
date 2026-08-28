@@ -17,6 +17,7 @@ const NAMES = {
   'en': 'en', 'zh': 'zh',
   'en-donation': 'en-donation', 'zh-donation': 'zh-donation',
   'en-footer': 'en-footer', 'zh-footer': 'zh-footer',
+  'en-focus': 'en-focus', 'zh-focus': 'zh-focus',
 };
 
 (async () => {
@@ -43,6 +44,14 @@ const NAMES = {
     await page.waitForTimeout(1200); // QR draw
     await page.screenshot({ path: path.join(OUT, `${label}-${NAMES[lang + '-donation']}.png`), fullPage: true });
     await page.click('#donation-close').catch(() => {});
+  }
+
+  if (args.includes('--focus')) {
+    await page.click('#btn-focus');
+    await page.waitForTimeout(400);
+    await page.screenshot({ path: path.join(OUT, `${label}-${NAMES[lang + '-focus']}.png`), fullPage: true });
+    await page.keyboard.press('Escape');
+    await page.waitForTimeout(200);
   }
 
   if (wantFooter) {
