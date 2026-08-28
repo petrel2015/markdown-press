@@ -1,30 +1,35 @@
 /* =====================================================================
-   MD·PRESS — research-report skin · fonts
-   ET Book (tufte-css, SIL OFL 1.1) vendored locally: 3 faces only.
-   Latin glyphs only — CJK falls back to Noto Serif SC / Songti via
-   the --serif stack in tokens.css. See fonts/LICENSE-et-book.txt.
+   MD·PRESS — research-report skin · fonts (同程紫黄主题)
+   Spectral（衬线叙事，OFL）×3 + IBM Plex Mono（等宽事实，OFL）×2。
+   TTF vendored at ../fonts/；中文回退思源宋/宋体栈见 tokens.css。
    ===================================================================== */
 
 @font-face {
-  font-family: "et-book";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../fonts/et-book-roman-line-figures.woff) format("woff");
+  font-family: "Spectral";
+  src: url(../fonts/Spectral-Regular.ttf) format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
 }
 
 @font-face {
-  font-family: "et-book";
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url(../fonts/et-book-display-italic-figures.woff) format("woff");
+  font-family: "Spectral";
+  src: url(../fonts/Spectral-Italic.ttf) format("truetype");
+  font-weight: 400; font-style: italic; font-display: swap;
 }
 
 @font-face {
-  font-family: "et-book";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url(../fonts/et-book-bold-line-figures.woff) format("woff");
+  font-family: "Spectral";
+  src: url(../fonts/Spectral-Bold.ttf) format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url(../fonts/IBMPlexMono-Regular.ttf) format("truetype");
+  font-weight: 400; font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url(../fonts/IBMPlexMono-Bold.ttf) format("truetype");
+  font-weight: 700; font-display: swap;
 }

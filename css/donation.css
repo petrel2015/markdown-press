@@ -1,7 +1,7 @@
 /* =====================================================================
-   MD·PRESS — donation dialog (research-report skin)
+   MD·PRESS — donation dialog (research-report · 同程紫黄)
    「请作者喝杯咖啡」: reuses the shell's tokens (paper, ink, hairline,
-   the single electric-blue accent) so the dialog reads as native.
+   brand purple as the only accent) so the dialog reads as native.
    The QR itself stays near-black on white — scan success beats theme.
    ===================================================================== */
 
@@ -20,7 +20,7 @@
   white-space: nowrap;
 }
 
-.donate-entry:hover { color: var(--blue); }
+.donate-entry:hover { color: var(--brand); }
 
 .donation-overlay {
   position: fixed;
@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(5, 28, 44, 0.45);
+  background: rgba(36, 31, 53, 0.45);
 }
 
 /* display:flex above outranks the UA's [hidden] rule — restate it */
@@ -63,7 +63,7 @@
   cursor: pointer;
 }
 
-.donation-close:hover { color: var(--blue); }
+.donation-close:hover { color: var(--brand); }
 
 .donation-title {
   margin: 0 0 6px;
@@ -79,7 +79,7 @@
   color: var(--ink-md);
 }
 
-/* channel switch: two chips, active floods electric blue */
+/* channel switch: two pills, active inverts to solid purple */
 .donation-tabs {
   display: inline-flex;
   gap: 8px;
@@ -88,30 +88,30 @@
 
 .donation-tab {
   appearance: none;
-  padding: 7px 16px;
+  padding: 7px 18px;
   font-family: var(--serif);
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--brand);
   background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
+  border: 1.5px solid var(--brand);
+  border-radius: 999px;
   cursor: pointer;
   transition: background .15s, border-color .15s, color .15s;
 }
 
 .donation-tab:hover {
-  color: var(--blue);
-  border-color: var(--blue);
+  color: var(--brand-deep);
+  border-color: var(--brand-deep);
 }
 
 .donation-tab.active {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 
-.donation-tab.active:hover { background: var(--blue-hi); border-color: var(--blue-hi); color: #fff; }
+.donation-tab.active:hover { background: var(--brand-deep); border-color: var(--brand-deep); color: #fff; }
 
 /* the QR itself: white card + near-black modules, quiet zone drawn in */
 .donation-qr {
@@ -141,5 +141,5 @@
     padding: 22px 16px 18px;
   }
 
-  .donation-tab { padding: 11px 20px; }
+  .donation-tab { padding: 11px 22px; }
 }

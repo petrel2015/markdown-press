@@ -1,7 +1,7 @@
 /* =====================================================================
-   MD·PRESS — application shell (research-report skin)
-   白纸墨阶 + 单一电光蓝 + 发丝线：ET Book 衬线讲人话，等宽体讲事实；
-   分组靠发丝线不靠卡片框；chips 是全页唯一的按钮形态。
+   MD·PRESS — application shell (research-report skin · 同程紫黄)
+   三色宪法：紫=唯一彩色文字（交互识别）；黄=仅底色（方点/荧光笔/黄洗）；
+   红=仅警示。衬线叙事、等宽事实；发丝线分组，pills 是全页唯一的按钮形态。
    ===================================================================== */
 
 * { box-sizing: border-box; }
@@ -14,7 +14,7 @@ html { height: auto; }
 body {
   min-height: 100%;
   margin: 0;
-  border-top: 3px solid var(--blue);   /* the masthead rule — the accent marks the page */
+  border-top: 3px solid var(--brand);   /* the masthead rule — brand marks the page */
   font-family: var(--serif);
   font-size: 16px;
   line-height: 1.6;
@@ -23,12 +23,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: rgba(34, 81, 255, .15); }
+::selection { background: var(--wash-sel); }
 
-a { color: var(--blue); }
-a:hover { color: var(--blue-hi); }
+a { color: var(--brand); }
+a:hover { color: var(--brand-deep); }
 
-:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
 
 /* booting: controls visible but dimmed with a progress cursor until
    the app has finished wiring listeners — pre-boot clicks are captured
@@ -89,18 +89,20 @@ html.md-booting .donate-entry {
   font-weight: 700;
   font-size: 1.02rem;
   letter-spacing: 0.02em;
+  color: var(--ink);
   margin-right: auto;
 }
 
+/* the yellow square — same grammar as section kickers site-wide */
 .brand::before {
   content: "";
-  width: 0.72rem;
-  height: 0.72rem;
-  background: var(--blue);
+  width: 8px;
+  height: 8px;
+  background: var(--hl);
   flex: none;
 }
 
-/* tab groups (view / language): mono words, active gets a blue underline */
+/* tab groups (view / language): mono words, active turns purple */
 .view-switch,
 .lang-switch { display: inline-flex; align-items: stretch; }
 
@@ -127,7 +129,7 @@ html.md-booting .donate-entry {
 .mini-toggle:hover { color: var(--ink); }
 
 .view-switch button[aria-pressed="true"],
-.lang-switch button[aria-pressed="true"] { color: var(--ink); }
+.lang-switch button[aria-pressed="true"] { color: var(--brand); }
 
 .view-switch button[aria-pressed="true"]::after,
 .lang-switch button[aria-pressed="true"]::after {
@@ -137,53 +139,54 @@ html.md-booting .donate-entry {
   right: 0.6rem;
   bottom: 5px;
   height: 3px;
-  background: var(--blue);
+  background: var(--brand);
 }
 
-.mini-toggle[aria-pressed="true"] { color: var(--ink); }
+.mini-toggle[aria-pressed="true"] { color: var(--brand); }
 
 .mini-toggle[aria-pressed="true"]::before {
-  content: "●";
-  color: var(--blue);
-  font-size: 0.62em;
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--hl);
   margin-right: 0.45em;
-  vertical-align: 0.18em;
 }
 
-/* chips — the only button form on the page: serif bold, ink outline,
-   hover floods electric blue */
+/* pills — the only button form on the page: purple-outline capsule,
+   hover inverts to solid purple */
 .btn {
   appearance: none;
   font-family: var(--serif);
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--brand);
   background: var(--paper);
-  border: 1.5px solid var(--ink);
-  border-radius: 6px;
+  border: 1.5px solid var(--brand);
+  border-radius: 999px;
   min-height: 34px;
-  padding: 0.15rem 0.85rem;
+  padding: 0.15rem 0.95rem;
   cursor: pointer;
   white-space: nowrap;
   transition: background .15s, border-color .15s, color .15s;
 }
 
 .btn:hover {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 
 /* the single solid element — the primary action */
 .btn-primary {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--brand);
+  border-color: var(--brand);
   color: #fff;
 }
 
 .btn-primary:hover {
-  background: var(--blue-hi);
-  border-color: var(--blue-hi);
+  background: var(--brand-deep);
+  border-color: var(--brand-deep);
   color: #fff;
 }
 
@@ -252,7 +255,7 @@ html.md-booting .donate-entry {
   background: var(--paper);
 }
 
-/* pane titles read as section numbers: mono kicker + blue dash */
+/* pane titles = section kickers: yellow square + purple mono + trailing hairline */
 .label {
   margin: 0;
   font-family: var(--mono);
@@ -260,19 +263,27 @@ html.md-booting .donate-entry {
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--brand);
   white-space: nowrap;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
 }
 
 .label::before {
   content: "";
-  flex: none;
-  width: 22px;
-  height: 3px;
-  background: var(--blue);
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  background: var(--hl);
+}
+
+.label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+  min-width: 14px;
 }
 
 .fmt-toolbar {
@@ -284,7 +295,7 @@ html.md-booting .donate-entry {
 
 .fmt-toolbar::-webkit-scrollbar { display: none; }
 
-/* formatting keys: the chip recipe, scaled down for the dense toolbar */
+/* formatting keys: the pill recipe, scaled down for the dense toolbar */
 .fmt {
   appearance: none;
   font-family: var(--serif);
@@ -293,8 +304,8 @@ html.md-booting .donate-entry {
   color: var(--ink-md);
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 5px;
-  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  padding: 0.18rem 0.65rem;
   min-height: 28px;
   white-space: nowrap;
   cursor: pointer;
@@ -302,8 +313,8 @@ html.md-booting .donate-entry {
 }
 
 .fmt:hover {
-  color: var(--blue);
-  border-color: var(--blue);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 
 .fmt-i { font-style: italic; }
@@ -321,7 +332,7 @@ body[data-mode="preview"] .pane-preview { width: 100%; }
 body[data-mode="split"] .pane-editor { width: var(--split); flex: none; }
 body[data-mode="split"] .pane-preview { flex: 1; }
 
-/* divider — a hairline that turns electric blue when grabbed */
+/* divider — a hairline that turns brand purple when grabbed */
 .divider {
   flex: none;
   width: 5px;
@@ -345,7 +356,7 @@ body[data-mode="split"] .pane-preview { flex: 1; }
 .divider.dragging::after {
   left: calc(50% - 1px);
   width: 3px;
-  background: var(--blue);
+  background: var(--brand);
 }
 
 body.col-resizing { cursor: col-resize; }
@@ -357,6 +368,9 @@ body.col-resizing .CodeMirror { pointer-events: none; }
   min-height: 0;
   position: relative;
 }
+
+/* the hidden source textarea behind CodeMirror — keep it on-palette too */
+textarea { color: var(--ink); font-family: var(--mono); }
 
 .editor-body .CodeMirror {
   position: absolute;
@@ -372,8 +386,9 @@ body.col-resizing .CodeMirror { pointer-events: none; }
 }
 
 /* ---- status bar · research dashboard strip --------------------------------
-   Machine facts (cursor, counts, save state) live here — all mono,
-   tabular numerals, quiet inks. */
+   Machine facts (cursor, counts, save state): mono + tabular numerals.
+   The live numbers carry the soft highlighter — yellow as background,
+   the theme's only yellow on this strip. */
 
 .statusbar {
   display: flex;
@@ -402,10 +417,16 @@ body.col-resizing .CodeMirror { pointer-events: none; }
 
 .st-stats { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 0.15rem; }
 
-.st-stats .sep { color: var(--line); margin: 0 0.45rem; }
+/* 荧光笔轻压：关键数字的默认语法（黄只做底色） */
+.st-stats > span {
+  background: linear-gradient(to top, var(--hl-soft) 42%, transparent 42%);
+  padding: 1px 3px;
+}
+
+.st-stats .sep { color: var(--ink-lo); margin: 0 0.45rem; background: none; padding: 0; }
 
 .st-save { white-space: nowrap; }
-.st-save.st-notice { color: var(--blue); font-weight: 700; }
+.st-save.st-notice { color: var(--brand); font-weight: 700; }
 
 /* ---- methodology footer (below the tool viewport) -------------------------- */
 
@@ -415,42 +436,44 @@ body.col-resizing .CodeMirror { pointer-events: none; }
 }
 
 .rr-foot-inner {
-  max-width: 800px;
+  max-width: 840px;
   margin: 0 auto;
   padding: 52px 24px 68px;
 }
 
+/* kicker: yellow square + purple mono + trailing hairline (sec-no grammar) */
 .rr-kicker {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--brand);
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 0 0 14px;
 }
 
-.rr-kicker::before { content: ""; flex: 0 0 26px; height: 3px; background: var(--blue); }
+.rr-kicker::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; background: var(--hl); }
+.rr-kicker::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
 .rr-title {
   margin: 0 0 10px;
   font-size: clamp(24px, 3vw, 30px);
   font-weight: 700;
   letter-spacing: -0.01em;
-  line-height: 1.25;
+  line-height: 1.28;
 }
 
 .rr-lede {
   margin: 0 0 26px;
   font-size: 15.5px;
-  line-height: 1.75;
+  line-height: 1.78;
   color: var(--ink-md);
   max-width: 620px;
 }
 
-/* analyst notes: top & bottom hairlines, no fill, no left bar */
+/* research notes: top & bottom hairlines, purple mono labels */
 .rr-notes {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -471,15 +494,15 @@ body.col-resizing .CodeMirror { pointer-events: none; }
   display: block;
   font-family: var(--mono);
   font-size: 9.5px;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ink-lo);
+  color: var(--brand);
   margin: 0 0 8px;
 }
 
 .rr-note p { margin: 0; }
 
-/* credits: horizontal hairlines, mono headers, no verticals */
+/* credits: data-table recipe — 2px ink top rule, hover rows wash yellow */
 .rr-credits {
   width: 100%;
   border-collapse: collapse;
@@ -490,20 +513,23 @@ body.col-resizing .CodeMirror { pointer-events: none; }
 .rr-credits th {
   font-family: var(--mono);
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-lo);
+  color: var(--ink-md);
   text-align: left;
-  font-weight: 400;
+  font-weight: 700;
   padding: 8px 12px 8px 0;
+  border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
 }
 
 .rr-credits td {
-  padding: 8px 12px 8px 0;
+  padding: 9px 12px 9px 0;
   border-bottom: 1px solid var(--line-lo);
   font-variant-numeric: tabular-nums;
 }
+
+.rr-credits tbody tr:hover td { background: var(--hl-soft); }
 
 .rr-credits td.rr-lic { font-family: var(--mono); font-size: 11px; color: var(--ink-md); }
 

@@ -1,0 +1,19 @@
+Spectral + IBM Plex Mono — vendored font faces (research-report skin · 同程紫黄)
+==============================================================================
+
+Source ...: research-report-style skill assets/fonts/ (bundled with the skill)
+License ..: SIL Open Font License 1.1 — free to embed, redistribute and use
+            in commercial projects. Full text:
+            https://openfontlicense.org/open-font-license-official-text/
+
+Faces bundled (5 faces, TTF):
+
+  Spectral-Regular.ttf        400 normal   (latin serif — narrative voice)
+  Spectral-Italic.ttf         400 italic
+  Spectral-Bold.ttf           700 normal
+  IBMPlexMono-Regular.ttf     400 normal   (data voice)
+  IBMPlexMono-Bold.ttf        700 normal
+
+Latin glyphs only — CJK text falls back to Noto Serif SC / Songti SC /
+STSong via the --serif stack in css/tokens.css. Chinese body text must
+never render in a sans-serif face.

@@ -1,16 +1,17 @@
 /* =====================================================================
-   MD·PRESS — rendered document typography (research-report)
+   MD·PRESS — rendered document typography (research-report · 同程紫黄)
    The preview pane, the PNG export and the print sheet all share
    this .md-doc base; only the frame differs.
-   衬线叙事 692px 阅读栏；组件无框化，分组靠发丝线。
+   衬线叙事 700px 阅读栏；引文双线规；数据表报头重线 + 行 hover 黄洗；
+   红只出现在警示（mermaid 错误 / diff 删除）。
    ===================================================================== */
 
 .md-doc {
-  max-width: 692px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 2.4rem 1.75rem 5rem;
   font-size: 17px;
-  line-height: 1.7;
+  line-height: 1.72;
   color: var(--ink);
   word-wrap: break-word;
 }
@@ -21,7 +22,7 @@
 .md-doc h1, .md-doc h2, .md-doc h3,
 .md-doc h4, .md-doc h5, .md-doc h6 {
   margin: 1.9em 0 0.6em;
-  line-height: 1.25;
+  line-height: 1.28;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
@@ -39,7 +40,7 @@
   border-bottom: 1px solid var(--line);
 }
 
-.md-doc h3 { font-size: 1.15rem; }
+.md-doc h3 { font-size: 1.18rem; }
 .md-doc h4 { font-size: 1rem; }
 .md-doc h5, .md-doc h6 { font-size: 0.92rem; color: var(--ink-md); }
 
@@ -47,26 +48,37 @@
 .md-doc p { margin: 0.85em 0; }
 
 .md-doc a {
-  color: var(--blue);
+  color: var(--brand);
   text-decoration: none;
   border-bottom: 1px solid currentColor;
 }
 
-.md-doc a:hover { color: var(--blue-hi); }
+.md-doc a:hover { color: var(--brand-deep); }
 
 .md-doc strong { font-weight: 700; }
 .md-doc em { font-style: italic; }
 
 .md-doc del { color: var(--ink-lo); }
 
-/* blockquote — analyst-note treatment: top & bottom hairlines,
-   no left bar, no fill */
+/* blockquote — the theme's double rule: 3px purple over a hairline,
+   closing hairline below; no fill, no left bar */
 .md-doc blockquote {
-  margin: 1.4em 0;
-  padding: 12px 0 13px;
-  border-top: 1px solid var(--line);
+  margin: 1.5em 0;
+  padding: 16px 0 14px;
+  border-top: 3px solid var(--brand);
   border-bottom: 1px solid var(--line);
   color: var(--ink-md);
+  position: relative;
+}
+
+.md-doc blockquote::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--line);
 }
 
 .md-doc blockquote p { margin: 0.45em 0; }
@@ -79,7 +91,8 @@
 
 .md-doc input[type="checkbox"] {
   margin-right: 0.45em;
-  accent-color: var(--blue);
+  accent-color: var(--brand);
+  color: var(--ink-md);
 }
 
 /* code — facts are mono; flat panel tint, no frame */
@@ -107,13 +120,13 @@
   padding: 0;
 }
 
-/* highlight.js — monochrome inks with the single blue accent */
+/* highlight.js — ink-scale with the single purple accent */
 .hljs { color: var(--ink); background: transparent; }
 .hljs-comment, .hljs-quote { color: var(--ink-lo); font-style: italic; }
 .hljs-keyword, .hljs-selector-tag, .hljs-subst { font-weight: 700; }
 .hljs-string, .hljs-regexp, .hljs-addition { color: var(--ink-md); font-style: italic; }
 .hljs-number, .hljs-literal, .hljs-symbol { font-weight: 600; }
-.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id { color: var(--blue); font-weight: 700; }
+.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id { color: var(--brand); font-weight: 700; }
 .hljs-attr, .hljs-attribute, .hljs-variable, .hljs-template-variable { color: var(--ink-md); }
 .hljs-type, .hljs-built_in, .hljs-class { color: var(--ink); font-weight: 600; }
 .hljs-meta { color: var(--ink-lo); }
@@ -121,8 +134,8 @@
 .hljs-emphasis { font-style: italic; }
 .hljs-strong { font-weight: 700; }
 
-/* tables — data-table recipe: horizontal hairlines only,
-   mono small-caps headers, no zebra, no verticals */
+/* tables — data-table recipe: 2px ink top rule on the header row,
+   hairline rows, hover washes yellow; no zebra, no verticals */
 .md-doc table {
   margin: 1.5em 0;
   border-collapse: collapse;
@@ -131,14 +144,15 @@
 }
 
 .md-doc th {
+  border-top: 2px solid var(--ink);
   border-bottom: 1px solid var(--line);
   text-align: left;
   font-family: var(--mono);
-  font-size: 0.68em;
-  font-weight: 400;
-  letter-spacing: 0.08em;
+  font-size: 0.66em;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-lo);
+  color: var(--ink-md);
   padding: 0.55em 0.75em 0.55em 0;
 }
 
@@ -148,17 +162,20 @@
   vertical-align: top;
 }
 
+.md-doc tbody tr:hover td { background: var(--hl-soft); }
+
 /* rules & media */
 .md-doc hr {
   border: 0;
   border-top: 1px solid var(--line-lo);
+  color: var(--ink-lo);   /* neutralise the UA's gray hr text color */
   margin: 2.2em 0;
 }
 
 .md-doc img { max-width: 100%; height: auto; display: block; margin: 1.2em auto; }
 
 /* mermaid — the diagram speaks for itself, no frame;
-   errors are the one negative-semantic use of red */
+   render errors are the warn-note case: red belongs only here */
 .md-doc .mermaid-block {
   margin: 1.7em 0;
   padding: 0;
@@ -169,10 +186,11 @@
 .md-doc .mermaid-block svg { max-width: 100%; }
 
 .md-doc .mermaid-block[data-done="error"] {
-  border-top: 1px solid var(--neg);
-  border-bottom: 1px solid var(--neg);
-  padding: 12px 0;
+  border: 1px dashed var(--neg);
+  border-radius: 4px;
+  padding: 10px 12px;
   text-align: left;
+  background: rgba(176, 36, 24, .045);
 }
 
 .md-doc .mermaid-error {
@@ -180,7 +198,7 @@
   font-family: var(--mono);
   font-size: 0.68rem;
   font-weight: 400;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.6rem;

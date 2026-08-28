@@ -13,3 +13,5 @@ test/qr-sample-*.png
 tools/node_modules/
 tools/shots/
 tools/package-lock.json
+_favicon_master.svg
+favicon-preview.png

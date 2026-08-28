@@ -1,43 +1,50 @@
 /* =====================================================================
-   MD·PRESS — research-report skin · design tokens
-   白纸墨阶 + 单一电光蓝强调 + 发丝线；衬线叙事，等宽事实。
-   Distilled from the research-report-style skill (asic42 / ET Book /
-   Tufte lineage). Values ARE the style — reuse names, do not retune.
+   MD·PRESS — research-report skin · design tokens (同程紫黄)
+   三色宪法：紫 #56338A 交互识别（唯一彩色文字）/ 黄 #F6C343 仅底色强调 /
+   红 #B02418 仅警示。骨架：白纸、紫黑墨阶、发丝线、衬线叙事+等宽事实。
+   Values ARE the style — reuse names, do not retune.
    ===================================================================== */
 
 :root {
   /* 纸面 */
   --paper: #ffffff;
-  --paper-hi: #f7f9fc;           /* panels / hover wash */
+  --paper-hi: #f8f7fb;           /* 紫调浅面板 / hover wash */
 
-  /* 墨阶 — text only ever uses these three inks */
-  --ink: #051c2c;                /* deep navy ink */
-  --ink-md: #42566a;
-  --ink-lo: #8595a6;
+  /* 墨阶（紫黑调——连黑白灰都为品牌让色） */
+  --ink: #241f35;
+  --ink-md: #57516b;
+  --ink-lo: #8b8698;
 
   /* 发丝线 */
-  --line: #dbe2ea;
-  --line-lo: #eef1f6;
+  --line: #e3e0eb;
+  --line-lo: #f0eef5;
 
-  /* 强调色 — the only accent on the page */
-  --blue: #2251ff;
-  --blue-hi: #1233b8;
-  --blue-lo: #7d9bff;
+  /* ── 三色宪法 ──
+     紫 = 交互识别：链接/kicker/章节号/active/当期，唯一可作文字的彩色
+     黄 = 仅底色：荧光笔压关键短语、章节方点、黄洗 hover，永不作白底文字色
+     红 = 仅警示：错误/缺失/风险，不表达涨跌方向 */
+  --brand: #56338a;
+  --brand-deep: #3e2465;
+  --brand-tint: #c9bce2;
+  --wash: rgba(86, 51, 138, .05);
+  --wash-sel: rgba(86, 51, 138, .16);
+  --hl: #f6c343;
+  --hl-strong: rgba(246, 195, 67, .55);
+  --hl-soft: rgba(246, 195, 67, .16);
+  --neg: #b02418;
 
-  /* 语义负面 — only for errors / loss / risk */
-  --neg: #c22f4e;
-
-  /* 来源分类徽章专用（正文与图表禁止挪用） */
-  --green: #008a6d;              /* 官方 / 许可文件 */
-  --copper: #b07a10;             /* 行业数据库 */
-  --violet: #7a45c9;             /* 新闻 / 档案 */
+  /* 来源分类徽章四色（避开紫/黄红） */
+  --tax-1: #145d75;              /* 玄青 — 公司披露 */
+  --tax-2: #8a6a10;              /* 金褐 — 行业数据库 */
+  --tax-3: #33427a;              /* 靛蓝 — 官方公报 */
+  --tax-4: #565170;              /* 石板 — 新闻档案 */
 
   /* 字体两声部：衬线讲人话，等宽讲机器话。
      --sans intentionally aliases the serif (editorial choice). */
-  --serif: "et-book", "Noto Serif SC", "Songti SC", "SimSun", "Iowan Old Style", Palatino, Georgia, serif;
+  --serif: "Spectral", "Noto Serif SC", "Songti SC", "STSong", "Iowan Old Style", Georgia, serif;
   --sans: var(--serif);
-  --mono: Menlo, Consolas, "SF Mono", monospace;
+  --mono: "IBM Plex Mono", Menlo, Consolas, monospace;
 
   /* the one shallow shadow allowed (floating overlays only) */
-  --shadow: 0 1px 2px rgba(5, 28, 44, .05), 0 8px 28px rgba(5, 28, 44, .07);
+  --shadow: 0 1px 2px rgba(36, 31, 53, .05), 0 8px 28px rgba(36, 31, 53, .07);
 }

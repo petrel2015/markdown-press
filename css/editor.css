@@ -1,6 +1,6 @@
 /* =====================================================================
-   MD·PRESS — CodeMirror skin (research-report)
-   等宽事实区：墨阶文字，唯一强调是电光蓝光标；语法角色只用墨的浓淡。
+   MD·PRESS — CodeMirror skin (research-report · 同程紫黄)
+   等宽事实区：紫黑墨阶文字，唯一彩色是紫色光标/链接（交互识别）。
    ===================================================================== */
 
 .CodeMirror {
@@ -26,28 +26,27 @@
   font-variant-numeric: tabular-nums;
 }
 
-.CodeMirror-cursor { border-left: 2px solid var(--blue); }
+.CodeMirror-cursor { border-left: 2px solid var(--brand); }
 
-.CodeMirror-selected { background: rgba(34, 81, 255, .08); }
-.CodeMirror-focused .CodeMirror-selected { background: rgba(34, 81, 255, .14); }
+.CodeMirror-selected { background: var(--wash); }
+.CodeMirror-focused .CodeMirror-selected { background: var(--wash-sel); }
 .CodeMirror-activeline-background { background: var(--paper-hi); }
 
-/* markdown tokens — ink scale for prose, blue only for links & tags */
-.cm-header { font-weight: 700; color: var(--ink); }
-.cm-header-1 { font-size: 1.2em; }
-.cm-header-2 { font-size: 1.1em; }
-.cm-strong { font-weight: 700; }
-.cm-em { font-style: italic; }
-.cm-formatting { color: var(--ink-lo); }
-.cm-quote { color: var(--ink-md); }
-.cm-link { color: var(--blue); }
-.cm-url { color: var(--ink-lo); }
-.cm-comment { color: var(--ink-lo); }
-.cm-keyword { color: var(--ink-lo); }
-.cm-string { color: var(--ink-md); }
-.cm-variable-2, .cm-variable-3, .cm-type { color: var(--ink-md); }
-.cm-tag { color: var(--blue); }
-.cm-atom, .cm-number { color: var(--ink-md); }
-.cm-hr { color: var(--ink-md); }
+/* markdown tokens — ink scale for prose, purple only for links & tags.
+   Selectors mirror codemirror.css's .cm-s-default specificity so the
+   skin actually overrides the default (blue/green) syntax palette;
+   the attribute catch-all comes first so named tokens can refine it. */
+.cm-s-default span[class^="cm-"] { color: var(--ink-md); }
+.cm-s-default .cm-formatting, .cm-s-default .cm-url,
+.cm-s-default .cm-comment, .cm-s-default .cm-keyword { color: var(--ink-lo); }
+.cm-s-default .cm-header { font-weight: 700; color: var(--ink); }
+.cm-s-default .cm-header-1 { font-size: 1.2em; }
+.cm-s-default .cm-header-2 { font-size: 1.1em; }
+.cm-s-default .cm-strong { font-weight: 700; }
+.cm-s-default .cm-em { font-style: italic; }
+.cm-s-default .cm-quote { color: var(--ink-md); }
+.cm-s-default .cm-link { color: var(--brand); }
+.cm-s-default .cm-tag { color: var(--brand); }
+.cm-s-default .cm-hr { color: var(--ink-md); }
 
 .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background: var(--paper); }
