@@ -8,11 +8,8 @@
 
 html { -webkit-text-size-adjust: 100%; }
 
-/* The tool keeps the whole first viewport; the methodology footer
-   below it is reached by scrolling (page becomes a document). */
-html { height: auto; }
+html, body { height: 100%; }
 body {
-  min-height: 100%;
   margin: 0;
   border-top: 3px solid var(--brand);   /* the masthead rule — brand marks the page */
   font-family: var(--serif);
@@ -60,8 +57,9 @@ html.md-booting .donate-entry {
 .app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  height: 100dvh;
+  /* 100vh minus the 3px masthead rule on body — exact fit, no page scroll */
+  height: calc(100vh - 3px);
+  height: calc(100dvh - 3px);
 }
 
 /* ---- masthead ---------------------------------------------------------- */
@@ -428,119 +426,6 @@ textarea { color: var(--ink); font-family: var(--mono); }
 .st-save { white-space: nowrap; }
 .st-save.st-notice { color: var(--brand); font-weight: 700; }
 
-/* ---- methodology footer (below the tool viewport) -------------------------- */
-
-.rr-footer {
-  border-top: 1px solid var(--line);
-  background: var(--paper);
-}
-
-.rr-foot-inner {
-  max-width: 840px;
-  margin: 0 auto;
-  padding: 52px 24px 68px;
-}
-
-/* kicker: yellow square + purple mono + trailing hairline (sec-no grammar) */
-.rr-kicker {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--brand);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 14px;
-}
-
-.rr-kicker::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; background: var(--hl); }
-.rr-kicker::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-
-.rr-title {
-  margin: 0 0 10px;
-  font-size: clamp(24px, 3vw, 30px);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.28;
-}
-
-.rr-lede {
-  margin: 0 0 26px;
-  font-size: 15.5px;
-  line-height: 1.78;
-  color: var(--ink-md);
-  max-width: 620px;
-}
-
-/* research notes: top & bottom hairlines, purple mono labels */
-.rr-notes {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0 30px;
-  margin: 6px 0 34px;
-}
-
-.rr-note {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 12px 0 13px;
-  font-size: 13.5px;
-  color: var(--ink-md);
-  line-height: 1.8;
-}
-
-.rr-note .rr-note-k {
-  display: block;
-  font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--brand);
-  margin: 0 0 8px;
-}
-
-.rr-note p { margin: 0; }
-
-/* credits: data-table recipe — 2px ink top rule, hover rows wash yellow */
-.rr-credits {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13.5px;
-  margin: 0 0 6px;
-}
-
-.rr-credits th {
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-md);
-  text-align: left;
-  font-weight: 700;
-  padding: 8px 12px 8px 0;
-  border-top: 2px solid var(--ink);
-  border-bottom: 1px solid var(--line);
-}
-
-.rr-credits td {
-  padding: 9px 12px 9px 0;
-  border-bottom: 1px solid var(--line-lo);
-  font-variant-numeric: tabular-nums;
-}
-
-.rr-credits tbody tr:hover td { background: var(--hl-soft); }
-
-.rr-credits td.rr-lic { font-family: var(--mono); font-size: 11px; color: var(--ink-md); }
-
-.rr-disc {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--ink-lo);
-  letter-spacing: 0.02em;
-  margin: 22px 0 0;
-}
-
 /* ---- offscreen roots ------------------------------------------------------------ */
 
 #print-root { display: none; }
@@ -574,8 +459,6 @@ textarea { color: var(--ink); font-family: var(--mono); }
   .pane-head { padding: 0.25rem 0.85rem; min-height: 44px; }
 
   .st-name { max-width: 34vw; }
-
-  .rr-notes { grid-template-columns: 1fr; gap: 14px; }
 }
 
 @media (max-width: 430px) {

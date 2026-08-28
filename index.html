@@ -119,53 +119,6 @@
 
   </div>
 
-  <!-- Methodology footer (research-report skin): analyst notes on how the
-       tool works, a source/credits table, and the disclaimer. Scroll-only
-       region — the tool above keeps its fixed viewport behaviour. -->
-  <section class="rr-footer" data-i18n-aria-label="methAria" aria-label="Methodology and notes">
-    <div class="rr-foot-inner">
-      <p class="rr-kicker" data-i18n="methKicker">Methodology &amp; notes</p>
-      <h2 class="rr-title" data-i18n="methTitle">How this page works</h2>
-      <p class="rr-lede" data-i18n="methLede">Everything happens on your machine.</p>
-
-      <div class="rr-notes">
-        <div class="rr-note">
-          <p class="rr-note-k" data-i18n="methRenderK">Rendering</p>
-          <p data-i18n="methRenderB">Markdown is parsed and highlighted in the browser.</p>
-        </div>
-        <div class="rr-note">
-          <p class="rr-note-k" data-i18n="methExportK">Export</p>
-          <p data-i18n="methExportB">PDF via the print pipeline, PNG rasterised locally.</p>
-        </div>
-        <div class="rr-note">
-          <p class="rr-note-k" data-i18n="methPrivacyK">Privacy</p>
-          <p data-i18n="methPrivacyB">localStorage only — no account, no analytics.</p>
-        </div>
-      </div>
-
-      <table class="rr-credits">
-        <thead>
-          <tr>
-            <th data-i18n="methColComp">Component</th>
-            <th data-i18n="methColRole">Role</th>
-            <th>License</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>CodeMirror</td><td data-i18n="methRdEditor">Source editor</td><td class="rr-lic">MIT</td></tr>
-          <tr><td>marked</td><td data-i18n="methRdMd">Markdown → HTML</td><td class="rr-lic">MIT</td></tr>
-          <tr><td>highlight.js</td><td data-i18n="methRdHl">Code highlighting</td><td class="rr-lic">BSD-3</td></tr>
-          <tr><td>mermaid</td><td data-i18n="methRdDiag">Diagrams</td><td class="rr-lic">MIT</td></tr>
-          <tr><td>html-to-image</td><td data-i18n="methRdPng">PNG rasterisation</td><td class="rr-lic">MIT</td></tr>
-          <tr><td>qrcode-generator</td><td data-i18n="methRdQr">Donation QR codes</td><td class="rr-lic">MIT</td></tr>
-          <tr><td>ET Book</td><td data-i18n="methRdFont">Typeface · via tufte-css</td><td class="rr-lic">OFL-1.1</td></tr>
-        </tbody>
-      </table>
-
-      <p class="rr-disc" data-i18n="methDisc">Provided as-is; keep your own backups.</p>
-    </div>
-  </section>
-
   <div id="print-root" aria-hidden="true"></div>
   <div id="png-root" aria-hidden="true"></div>
   <input type="file" id="file-open" accept=".md,.markdown,.txt,text/markdown,text/plain" hidden>

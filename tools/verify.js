@@ -128,27 +128,16 @@ const ok = (name, cond, extra) => {
   });
   ok('红仅存在于警示选择器', redRules >= 2, String(redRules) + ' 处');
 
-  // 9. footer kicker bilingual + credits hover yellow wash
-  const foot = await page.evaluate(() => {
-    const k = document.querySelector('.rr-kicker');
-    const t = document.querySelector('.rr-title');
-    const s = getComputedStyle(k, '::before');
-    return { top: k.getBoundingClientRect().top, sq: s.backgroundColor, kicker: k.textContent, title: t.textContent };
-  });
-  ok('页脚黄方点 kicker', foot.sq === 'rgb(246, 195, 67)', foot.sq);
-  ok('页脚在首屏之下', foot.top >= 1000, 'top=' + Math.round(foot.top));
-  ok('页脚文案', foot.kicker === 'Methodology & notes' && foot.title === 'How this page works', foot.kicker);
+  // 9. footer is gone: the tool is the whole document, no extra scroll
+  const noFooter = await page.evaluate(() => document.querySelector('.rr-footer') === null);
+  ok('方法论页脚已移除', noFooter);
 
   await page.evaluate(() => localStorage.setItem('mdpress-lang', 'zh'));
   await page.reload({ waitUntil: 'networkidle' });
   const zh = await page.evaluate(() => {
     const p = document.querySelector('.md-doc p');
-    return {
-      kicker: document.querySelector('.rr-kicker').textContent,
-      ff: p ? getComputedStyle(p).fontFamily : '',
-    };
+    return { ff: p ? getComputedStyle(p).fontFamily : '' };
   });
-  ok('中文页脚 kicker', zh.kicker === '方法论与说明', zh.kicker);
   ok('中文正文衬线栈(思源宋回退)', /Noto Serif SC|Songti SC|STSong/.test(zh.ff), zh.ff.slice(0, 70));
 
   // 10. donation dialog pills
@@ -162,14 +151,14 @@ const ok = (name, cond, extra) => {
   ok('捐赠 tab 胶囊', don.radius === '999px', don.radius);
   await page.click('#donation-close');
 
-  // 11. geometry: tool fills viewport; page scrolls for footer; phone no overflow
+  // 11. geometry: the tool is the whole document — fills viewport, no extra scroll
   const geom = await page.evaluate(() => ({
-    appH: document.querySelector('.app').getBoundingClientRect().height,
+    appBottom: document.querySelector('.app').getBoundingClientRect().bottom,
     vh: window.innerHeight,
     scrollH: document.documentElement.scrollHeight,
   }));
-  ok('工具仍占满一屏', Math.abs(geom.appH - geom.vh) < 2, geom.appH + '/' + geom.vh);
-  ok('页面可滚出页脚', geom.scrollH > geom.vh + 300, 'scroll=' + geom.scrollH);
+  ok('工具贴满视口(底边到达)', Math.abs(geom.appBottom - geom.vh) < 2, geom.appBottom + '/' + geom.vh);
+  ok('页面无多余滚动(页脚已移除)', Math.abs(geom.scrollH - geom.vh) < 2, 'scroll=' + geom.scrollH);
 
   const mp = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await mp.goto(BASE, { waitUntil: 'networkidle' });

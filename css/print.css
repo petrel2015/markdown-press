@@ -15,7 +15,7 @@
     border-top: none;
   }
 
-  .app, .rr-footer, #png-root { display: none !important; }
+  .app, #png-root { display: none !important; }
 
   #print-root { display: block; }
 
